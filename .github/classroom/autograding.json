@@ -1,0 +1,54 @@
+{
+  "tests": [
+    {
+      "name": "Test 1",
+      "setup": "",
+      "run": "python3 Main.py",
+      "input": "2 3 4\r\n5 6 7",
+      "output": "[7, 9, 1, 1]",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 5
+    },
+    {
+      "name": "Test 2",
+      "setup": "",
+      "run": "python3 Main.py",
+      "input": "9 9 9 9 9 9 9\r\n9 9 9 9",
+      "output": "[8, 9, 9, 9, 0, 0, 0, 1]",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 5
+    },
+    {
+      "name": "Test 3",
+      "setup": "",
+      "run": "python3 Main.py",
+      "input": "8 7 6 9 4 3\r\n1 2 3 4 5 6",
+      "output": "[9, 9, 9, 3, 0, 0, 1]",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 5
+    },
+    {
+      "name": "Test 4",
+      "setup": "",
+      "run": "python3 Main.py",
+      "input": "0\r\n0",
+      "output": "[0]",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 5
+    },
+    {
+      "name": "Test 5",
+      "setup": "",
+      "run": "python3 Main.py",
+      "input": "1 6 7\r\n7 6 1",
+      "output": "[8, 2, 9]",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 5
+    }
+  ]
+}
