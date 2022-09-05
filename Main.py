@@ -5,7 +5,7 @@ class Node:
     """
     Provide necessary documentation
     """
-    def __init__(self, data=None, next=None):
+    def _init_(self, data=None, next=None):
         """
         Provide necessary documentation
         """
@@ -17,7 +17,7 @@ class LinkedList:
     """
     Provide necessary documentation
     """
-    def __init__(self):
+    def _init_(self):
         """
         Initialize the head
         """
@@ -29,12 +29,11 @@ class LinkedList:
         :param data: integer data that will be used to create a node
         """
         # Write code here
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head=new_node
 
-    def status(self):
-        """
-        It prints all the elements of list.
-        """
-        # write code here
+    
 
 
 class Solution:
@@ -48,8 +47,27 @@ class Solution:
         :return: returns the sum as a linked list
         """
         # Write code here
+        def string(node):
+            v=""
+            while node!=None:
+                v+=str(node.data)
+                node=node.next
+            return v
+            
+        z=string(first_list.head)
+        j=string(second_list.head)
         
+        listy=[]
+        for x in list(str(int(z)+int(j))[::-1]):
+            listy.append(int(x))
+        return listy
         
+    def status(self,listt):
+        """
+        It prints all the elements of list.
+        """
+        # write code here
+        print(listt)
 
 # Do not edit the following code      
 # Create an instance for LinkedList
@@ -71,4 +89,4 @@ solution = Solution()
 # Pass first_list and second_list to addTwoNumbers, which returns a new linked list
 new_list = solution.addTwoNumbers(first_list, second_list)
 # Display the status of new_list
-new_list.status()
+Status=solution.status(new_list)
