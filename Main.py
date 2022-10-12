@@ -3,11 +3,12 @@ from typing import Optional
 
 class Node:
     """
-    Provide necessary documentation
+    This class is to create a node
     """
-    def _init_(self, data=None, next=None):
+
+    def __init__(self, data=None, next=None):
         """
-        Provide necessary documentation
+        Instance variables of Node object
         """
         self.data = data
         self.next = next
@@ -17,7 +18,8 @@ class LinkedList:
     """
     Provide necessary documentation
     """
-    def _init_(self):
+
+    def __init__(self):
         """
         Initialize the head
         """
@@ -28,48 +30,101 @@ class LinkedList:
         Insert node at end of the list
         :param data: integer data that will be used to create a node
         """
-        # Write code here
-        new_node = Node(data)
-        new_node.next = self.head
-        self.head=new_node
+        node=Node(data)
+        temp=self.head
+        if temp==None:
+            self.head=node
+            return
 
-    
+        while temp.next!=None:
+            temp=temp.next
+        temp.next=node
+
+    def status(self):
+        """
+        It prints all the elements of list.
+        """
+        temp=self.head
+        print("[",end="")
+        while temp.next!=None:
+            print(temp.data,end=", ")
+            temp=temp.next
+        print(temp.data,end="]\n")
 
 
 class Solution:
     """
-    Provide necessary documentation
+    This class is for adding two linked list
     """
-    def addTwoNumbers(self, first_list: Optional[LinkedList], second_list: Optional[LinkedList]) -> Optional[LinkedList]:
+
+    @staticmethod
+    def get_total_elements(linked_list):
+        count=1
+        temp=linked_list.head
+        while temp != None:
+            temp = temp.next
+            count += 1
+        return count
+
+    @staticmethod
+    def balance(linked_list,n,val = 0):
+        for i in range(n):
+            linked_list.insert_at_end(val)
+        return linked_list
+
+    def get_node(self,linked_list):
+        temp=linked_list.head
+        x = None
+        while temp!=None:
+            x = temp
+            temp = temp.next
+            yield x.data
+
+
+    def addTwoNumbers(self, first_list: Optional[LinkedList], second_list: Optional[LinkedList]) -> Optional[
+        LinkedList]:
         """
         :param first_list: Linkedlist with non-negative integers
         :param second_list: Linkedlist with non-negative integers
         :return: returns the sum as a linked list
         """
-        # Write code here
-        def string(node):
-            v=""
-            while node!=None:
-                v+=str(node.data)
-                node=node.next
-            return v
-            
-        z=string(first_list.head)
-        j=string(second_list.head)
-        
-        listy=[]
-        for x in list(str(int(z)+int(j))[::-1]):
-            listy.append(int(x))
-        return listy
-        
-    def status(self,listt):
-        """
-        It prints all the elements of list.
-        """
-        # write code here
-        print(listt)
+        a = self.get_total_elements(first_list)
+        b = self.get_total_elements(second_list)
+        result = LinkedList()
 
-# Do not edit the following code      
+        if a>b:
+            second_list = self.balance(second_list, b)
+        else:
+            first_list = self.balance(first_list, a)
+        temp_val = 0
+        for i,j in zip(self.get_node(first_list),self.get_node(second_list)):
+            # print(f"values are : {i}, {j}")
+            total = i+j
+            # print(f"temp val : {temp_val}")
+            visited = False
+            if total+temp_val>9:
+                visited = True
+                if temp_val>0:
+                    total += temp_val
+                    temp_val = 0
+                    # print(f"Yeah! temp_val > 0 so now total will be : {total}")
+                temp_val += total//10
+                # print(f"Now temp will be : {temp_val} because i+j is : {total}")
+                total = total%10
+            if temp_val>0 and not visited:
+                total += temp_val
+                temp_val = 0
+            result.insert_at_end(total)
+
+        if temp_val>0:
+            result.insert_at_end(temp_val)
+
+        return result
+
+
+
+
+# Do not edit the following code
 # Create an instance for LinkedList
 first_list = LinkedList()
 # Create an another instance for LinkedList
@@ -89,4 +144,5 @@ solution = Solution()
 # Pass first_list and second_list to addTwoNumbers, which returns a new linked list
 new_list = solution.addTwoNumbers(first_list, second_list)
 # Display the status of new_list
-Status=solution.status(new_list)
+new_list.status()
+
